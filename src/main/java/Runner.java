@@ -1,5 +1,5 @@
-import dao.PrimeDAO;
-import entities.Prime;
+import dao.UserDAO;
+import entities.User;
 
 /**
  *
@@ -8,11 +8,12 @@ import entities.Prime;
 public class Runner {
 
     public static void main(String[] args) {
-        PrimeDAO primeDAO = new PrimeDAO();
 
-        for (int i = 5; i < 25; i++) {
-            Prime prime = new Prime();
-            primeDAO.create(prime);
-        }
+        UserDAO userDAO = new UserDAO();
+        User user = new User();
+        user.setFistName("Anton");
+        user.setLastName("Rash");
+        user.setPhoneNumber("050-516-93-32");
+        userDAO.create(user);
     }
 }

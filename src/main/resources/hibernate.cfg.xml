@@ -27,6 +27,7 @@
 
         <!-- mappings -->
         <mapping class="entities.Prime"/>
+        <mapping class="entities.User"/>
 
     </session-factory>
 </hibernate-configuration>
