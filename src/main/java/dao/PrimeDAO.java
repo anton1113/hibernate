@@ -10,7 +10,15 @@ import java.util.List;
  */
 public class PrimeDAO extends BaseDAO {
 
+    public void create(Prime prime) {
+        super.create(prime);
+    }
+
     public List<Prime> findAll() {
         return (List<Prime>) super.findAll();
+    }
+
+    public void deleteAll() {
+        super.deleteAll();
     }
 }

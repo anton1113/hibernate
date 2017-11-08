@@ -38,12 +38,10 @@ public class IndexController {
     }
 
     private void addNewPrime() {
-        //primeDAO.create(new Prime());
+        primeDAO.create(new Prime());
     }
 
     private void deleteAllPrimes() {
-        for (Prime p: getPrimes()) {
-            //primeDAO.delete(p);
-        }
+        primeDAO.deleteAll();
     }
 }
