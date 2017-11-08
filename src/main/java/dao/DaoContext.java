@@ -11,21 +11,16 @@ import org.hibernate.cfg.Configuration;
  */
 public class DaoContext {
 
-    private static final SessionFactory sf;
+    private static final SessionFactory sf = buildSessionFactory();
 
-    private static final PrimeDAO primeDao;
-    private static final UserDAO userDao;
+    private static final PrimeDAO primeDao = new PrimeDAO();
+    private static final UserDAO userDao = new UserDAO();
 
-    static {
-
-        primeDao = new PrimeDAO();
-        userDao = new UserDAO();
-
+    public static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
-
-            sf = configuration.buildSessionFactory();
+            return configuration.buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }
