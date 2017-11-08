@@ -8,7 +8,4 @@ import entities.User;
  */
 public class UserDAO extends BaseDAO {
 
-    public void create(User user) {
-        super.create(user);
-    }
 }

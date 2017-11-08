@@ -8,24 +8,35 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <f:view contentType="text/html">
-   <h:head>
-      <title>
-         Hibernate basic
-      </title>
-      <link href="#{request.contextPath}/css/index.css"
-            rel="stylesheet"
-            type="text/css"/>
-   </h:head>
+    <h:head>
+        <title>
+            Hibernate basic
+        </title>
+        <link href="#{request.contextPath}/css/index.css"
+              rel="stylesheet"
+              type="text/css"/>
+    </h:head>
 
-   <h:body>
-      <h:form>
-         <h:outputText styleClass="indexHeader" value="Header Text"/>
-         <p:separator/>
-         <p:dataList value="#{index.primes}" var="prime" type="ordered">
-            #{prime.id}
-         </p:dataList>
-      </h:form>
-   </h:body>
+    <h:body>
+        <h:form>
+            <h:outputText value="Header Text"/>
+            <p:separator/>
+            <p:dataList id="primesDataList"
+                        value="#{index.primes}" var="prime">
+                #{prime.id}
+            </p:dataList>
+            <p:commandButton id="createPrime"
+                             value="Add new Prime"
+                             actionListener="#{index.onCreatePrimeCommandButtonClicked}"
+                             update="primesDataList">
+            </p:commandButton>
+            <p:commandButton id="deleteAllPrimes"
+                             value="Delete all Primes"
+                             actionListener="#{index.onDeleteAllPrimesCommandButtonClicked}"
+                             update="primesDataList"/>
+            <p:hotkey bind="ctrl+s" handler="PF('createPrime').click();"/>
+        </h:form>
+    </h:body>
 </f:view>
 
 </html>

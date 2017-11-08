@@ -10,13 +10,7 @@ import java.util.List;
  */
 public class PrimeDAO extends BaseDAO {
 
-    private static final String CLASS_NAME = "Prime";
-
-    public void create(Prime prime) {
-        super.create(prime);
-    }
-
     public List<Prime> findAll() {
-        return (List<Prime>) super.findAll(CLASS_NAME);
+        return (List<Prime>) super.findAll();
     }
 }

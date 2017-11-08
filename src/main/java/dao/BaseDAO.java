@@ -1,10 +1,8 @@
 package dao;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.Collection;
 
 /**
  *
@@ -12,29 +10,15 @@ import java.util.List;
  */
 public abstract class BaseDAO {
 
-    Session session;
-    Transaction tx;
+    protected EntityManager em = HibernateUtil.getEm();
 
-    protected void create(Object object) {
+    protected Collection<? extends Object> findAll() {
 
-        try {
-            startOperation();
-            session.save(object);
-            endOperation();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected List<? extends Object> findAll(String className) {
-
-        List<Object> result = null;
+        Collection<?> result = null;
 
         try {
-            startOperation();
-            Query query = session.createQuery("select o from " + className + " o");
-            result = query.getResultList();
-            endOperation();
+            Query q = em.createQuery("select o from " + getEntityClassname() + " o");
+            result = q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,13 +26,8 @@ public abstract class BaseDAO {
         return result;
     }
 
-    private void startOperation() {
-        session = DaoContext.getSession();
-        tx = session.beginTransaction();
-    }
-
-    private void endOperation() {
-        tx.commit();
-        session.close();
+    protected String getEntityClassname() {
+        String daoClassname = getClass().getSimpleName();
+        return daoClassname.substring(0, daoClassname.length() - 3);
     }
 }

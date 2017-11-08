@@ -1,6 +1,5 @@
 package managed_beans;
 
-import dao.DaoContext;
 import dao.PrimeDAO;
 import entities.Prime;
 
@@ -18,7 +17,7 @@ public class IndexController {
     private List<Prime> primes;
 
     public List<Prime> getPrimes() {
-        return primes;
+        return primeDAO.findAll();
     }
 
     public void setPrimes(List<Prime> primes) {
@@ -27,12 +26,24 @@ public class IndexController {
 
     @PostConstruct
     public void init() {
-        initDaoContext();
         primeDAO = new PrimeDAO();
-        primes = primeDAO.findAll();
     }
 
-    private void initDaoContext() {
-        DaoContext.getUserDao();
+    public void onCreatePrimeCommandButtonClicked() {
+        addNewPrime();
+    }
+
+    public void onDeleteAllPrimesCommandButtonClicked() {
+        deleteAllPrimes();
+    }
+
+    private void addNewPrime() {
+        //primeDAO.create(new Prime());
+    }
+
+    private void deleteAllPrimes() {
+        for (Prime p: getPrimes()) {
+            //primeDAO.delete(p);
+        }
     }
 }
